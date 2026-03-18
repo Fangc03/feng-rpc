@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>example-consumer</artifactId>
+    <artifactId>feng-rpc-core</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -17,13 +17,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
         <dependency>
-            <groupId>com.feng</groupId>
-            <artifactId>feng-rpc-core</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.3.12</version>
         </dependency>
         <dependency>
-            <groupId>com.feng</groupId>
-            <artifactId>example-common</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-core -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>4.5.1</version>
         </dependency>
         <!-- https://doc.hutool.cn/ -->
         <dependency>

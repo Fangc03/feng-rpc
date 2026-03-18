@@ -1,6 +1,7 @@
 package com.feng.provider;
 
 
+import com.feng.RpcApplication;
 import com.feng.registry.LocalRegistry;
 import com.feng.server.HttpServer;
 import com.feng.server.VertxHttpServer;
@@ -13,6 +14,7 @@ import com.feng.service.UserService;
 public class SimpleProviderExample {
 
     public static void main(String[] args) {
+        RpcApplication.init();
         // 注册服务
         LocalRegistry.register(UserService.class.getName(), UserServiceImpl.class);
 

@@ -26,6 +26,7 @@
         <module>example-consumer</module>
         <module>example-provider</module>
         <module>feng-rpc-simple</module>
+        <module>feng-rpc-core</module>
     </modules>
     <scm>
         <connection/>
@@ -44,6 +45,11 @@
             <dependency>
                 <groupId>com.feng</groupId>
                 <artifactId>feng-rpc-simple</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.feng</groupId>
+                <artifactId>feng-rpc-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

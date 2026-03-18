@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.feng</groupId>
-            <artifactId>feng-rpc-simple</artifactId>
+            <artifactId>feng-rpc-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.feng</groupId>
