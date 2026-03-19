@@ -1,0 +1,4 @@
+com.feng.serializer.JdkSerializer
+com.feng.serializer.HessianSerializer
+com.feng.serializer.JsonSerializer
+com.feng.serializer.KryoSerializer
