@@ -1,6 +1,9 @@
 package com.feng;
 
+import com.feng.config.RegistryConfig;
 import com.feng.config.RpcConfig;
+import com.feng.registry.Registry;
+import com.feng.registry.RegistryFactory;
 import com.feng.utils.ConfigUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +23,10 @@ public class RpcApplication {
     public static void init(RpcConfig newRpcConfig) {
         rpcConfig = newRpcConfig;
         log.info("RpcConfig init success:{}", newRpcConfig.toString());
+        RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
+        Registry registry = RegistryFactory.getInstance(registryConfig.getRegitry());
+        registry.init(registryConfig);
+        log.info("Registry init ,config = {}", registryConfig);
     }
 
     /**
