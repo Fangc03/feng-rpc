@@ -26,7 +26,7 @@ public class SimpleProviderExample {
         //注册服务到注册中心
         RpcConfig rpcConfig = RpcApplication.getRpcConfig();
         RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
-        Registry instance = RegistryFactory.getInstance(registryConfig.getRegitry());
+        Registry instance = RegistryFactory.getInstance(registryConfig.getRegister());
         ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
         serviceMetaInfo.setServiceName(UserService.class.getName());
         serviceMetaInfo.setServiceHost(rpcConfig.getServerHost());

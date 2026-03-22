@@ -51,7 +51,7 @@ public class ServiceProxy implements InvocationHandler {
             // 发送请求
             // 注意，这里地址被硬编码了（需要使用注册中心和服务发现机制解决）
             RpcConfig rpcConfig = RpcApplication.getRpcConfig();
-            Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegitry());
+            Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegister());
             ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
             serviceMetaInfo.setServiceName(method.getDeclaringClass().getName());
             serviceMetaInfo.setServiceVersion(RpcConstant.DEFAULT_SERVICE_VERSION);

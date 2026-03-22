@@ -1,1 +1,2 @@
 etcd=com.feng.registry.EtcdRegistry
+redis=com.feng.registry.RedisRegistry
