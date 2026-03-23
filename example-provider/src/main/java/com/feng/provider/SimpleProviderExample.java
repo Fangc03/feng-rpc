@@ -9,7 +9,7 @@ import com.feng.registry.LocalRegistry;
 import com.feng.registry.Registry;
 import com.feng.registry.RegistryFactory;
 import com.feng.server.HttpServer;
-import com.feng.server.VertxHttpServer;
+import com.feng.server.VertxTcpServer;
 import com.feng.service.UserService;
 
 /**
@@ -37,7 +37,7 @@ public class SimpleProviderExample {
             throw new RuntimeException(e);
         }
         // 启动 web 服务
-        HttpServer httpServer = new VertxHttpServer();
+        HttpServer httpServer = new VertxTcpServer();
 
         httpServer.doStart(RpcApplication.getRpcConfig().getServerPort());
     }

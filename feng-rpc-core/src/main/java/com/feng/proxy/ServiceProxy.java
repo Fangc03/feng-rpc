@@ -2,8 +2,6 @@ package com.feng.proxy;
 
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
 import com.feng.RpcApplication;
 import com.feng.config.RpcConfig;
 import com.feng.constant.RpcConstant;
@@ -12,9 +10,9 @@ import com.feng.model.RpcResponse;
 import com.feng.model.ServiceMetaInfo;
 import com.feng.registry.Registry;
 import com.feng.registry.RegistryFactory;
-import com.feng.serializer.JdkSerializer;
 import com.feng.serializer.Serializer;
 import com.feng.serializer.SerializerFactory;
+import com.feng.server.tcp.VertxTcpClient;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
@@ -23,7 +21,6 @@ import java.util.List;
 
 /**
  * 服务代理（JDK 动态代理）
- *
  */
 public class ServiceProxy implements InvocationHandler {
 
@@ -56,18 +53,13 @@ public class ServiceProxy implements InvocationHandler {
             serviceMetaInfo.setServiceName(method.getDeclaringClass().getName());
             serviceMetaInfo.setServiceVersion(RpcConstant.DEFAULT_SERVICE_VERSION);
             List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceMetaInfo.getServiceKey());
-            if (CollUtil.isEmpty(serviceMetaInfoList)){
+            if (CollUtil.isEmpty(serviceMetaInfoList)) {
                 throw new RuntimeException("No service found");
             }
             ServiceMetaInfo serviceMetaInfo1 = serviceMetaInfoList.get(0);
-            try (HttpResponse httpResponse = HttpRequest.post(serviceMetaInfo1.getServiceAddress())
-                    .body(bodyBytes)
-                    .execute()) {
-                byte[] result = httpResponse.bodyBytes();
-                // 反序列化
-                RpcResponse rpcResponse = serializer.deserialize(result, RpcResponse.class);
-                return rpcResponse.getData();
-            }
+            //发送TCP请求
+            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, serviceMetaInfo1);
+            return rpcResponse.getData();
         } catch (IOException e) {
             e.printStackTrace();
         }
