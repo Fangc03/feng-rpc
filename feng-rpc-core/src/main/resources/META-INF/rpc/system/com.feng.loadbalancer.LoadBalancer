@@ -1,0 +1,3 @@
+roundRobin=com.feng.loadbalancer.RoundRobinLoadBalancer
+random=com.feng.loadbalancer.RandomLoadBalancer
+consistentHash=com.feng.loadbalancer.ConsistentHashLoadBalancer

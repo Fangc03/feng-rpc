@@ -5,6 +5,8 @@ import cn.hutool.core.collection.CollUtil;
 import com.feng.RpcApplication;
 import com.feng.config.RpcConfig;
 import com.feng.constant.RpcConstant;
+import com.feng.loadbalancer.LoadBalancer;
+import com.feng.loadbalancer.LoadBalancerFactory;
 import com.feng.model.RpcRequest;
 import com.feng.model.RpcResponse;
 import com.feng.model.ServiceMetaInfo;
@@ -17,7 +19,9 @@ import com.feng.server.tcp.VertxTcpClient;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 服务代理（JDK 动态代理）
@@ -56,9 +60,12 @@ public class ServiceProxy implements InvocationHandler {
             if (CollUtil.isEmpty(serviceMetaInfoList)) {
                 throw new RuntimeException("No service found");
             }
-            ServiceMetaInfo serviceMetaInfo1 = serviceMetaInfoList.get(0);
+            LoadBalancer loadBalancer = LoadBalancerFactory.getInstance(RpcApplication.getRpcConfig().getLoadBalancer());
+            Map<String, Object> requestParams = new HashMap<>();
+            requestParams.put("methodName", rpcRequest.getMethodName());
+            ServiceMetaInfo selectServiceMetaInfo = loadBalancer.select(requestParams, serviceMetaInfoList);
             //发送TCP请求
-            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, serviceMetaInfo1);
+            RpcResponse rpcResponse = VertxTcpClient.doRequest(rpcRequest, selectServiceMetaInfo);
             return rpcResponse.getData();
         } catch (IOException e) {
             e.printStackTrace();
