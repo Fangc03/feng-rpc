@@ -10,11 +10,11 @@ public class RegistryConfig {
     /**
      * 注册中心类型
      */
-    private String register;
+    private String register = "redis";
     /**
      * 注册中心地址
      */
-    private String address;
+    private String address = "127.0.0.1:6379";
     /**
      *
      */
