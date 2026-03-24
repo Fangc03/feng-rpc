@@ -1,0 +1,2 @@
+no=com.feng.retry.NoRetryStrategy
+fixedInterval=com.feng.retry.FixedIntervalRetryStrategy

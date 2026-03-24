@@ -1,6 +1,7 @@
 package com.feng.config;
 
 import com.feng.loadbalancer.LoadBalancerKeys;
+import com.feng.retry.RetryStrategyKeys;
 import com.feng.serializer.SerializerKeys;
 import lombok.Data;
 
@@ -41,4 +42,8 @@ public class RpcConfig {
      * 负载均衡器
      */
     private String loadBalancer = LoadBalancerKeys.ROUND_ROBIN;
+    /**
+     * 重试策略
+     */
+    private String retryStrategy = RetryStrategyKeys.NO;
 }
