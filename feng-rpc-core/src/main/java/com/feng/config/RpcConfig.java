@@ -1,5 +1,6 @@
 package com.feng.config;
 
+import com.feng.fault.tolerant.TolerantStrategyKeys;
 import com.feng.loadbalancer.LoadBalancerKeys;
 import com.feng.retry.RetryStrategyKeys;
 import com.feng.serializer.SerializerKeys;
@@ -46,4 +47,8 @@ public class RpcConfig {
      * 重试策略
      */
     private String retryStrategy = RetryStrategyKeys.NO;
+    /**
+     * 容错策略
+     */
+    private String tolerantStrategy = TolerantStrategyKeys.FAIL_FAST;
 }

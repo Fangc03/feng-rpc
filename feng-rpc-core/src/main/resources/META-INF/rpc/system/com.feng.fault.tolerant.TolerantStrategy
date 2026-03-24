@@ -1,0 +1,2 @@
+failBack=com.feng.fault.tolerant.FailBackTolerantStrategy
+failFast=com.feng.fault.tolerant.FailFastTolerantStrategy

@@ -5,6 +5,8 @@ import cn.hutool.core.collection.CollUtil;
 import com.feng.RpcApplication;
 import com.feng.config.RpcConfig;
 import com.feng.constant.RpcConstant;
+import com.feng.fault.tolerant.TolerantStrategy;
+import com.feng.fault.tolerant.TolerantStrategyFactory;
 import com.feng.loadbalancer.LoadBalancer;
 import com.feng.loadbalancer.LoadBalancerFactory;
 import com.feng.model.RpcRequest;
@@ -74,7 +76,8 @@ public class ServiceProxy implements InvocationHandler {
             );
             return rpcResponse.getData();
         } catch (IOException e) {
-            e.printStackTrace();
+            TolerantStrategy tolerantStrategy = TolerantStrategyFactory.getInstance(RpcApplication.getRpcConfig().getTolerantStrategy());
+            tolerantStrategy.doTolerant(null, e);
         }
 
         return null;
