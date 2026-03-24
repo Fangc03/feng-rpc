@@ -27,6 +27,7 @@
         <module>example-provider</module>
         <module>feng-rpc-simple</module>
         <module>feng-rpc-core</module>
+        <module>feng-rpc-spring-boot-starter</module>
     </modules>
     <scm>
         <connection/>
